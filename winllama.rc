@@ -1,0 +1,37 @@
+#include "winllama.h"
+
+/*
+ * Numeric styles keep this script independent of the Watcom header search
+ * path.  The values are Win16's WS_POPUP | WS_CAPTION | WS_SYSMENU |
+ * DS_MODALFRAME and ES_AUTOHSCROLL respectively.
+ */
+
+WINLLAMA_DIALOG DIALOG 12, 12, 298, 236
+STYLE 0x80C80080L
+CAPTION "WinLlama 3.x"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT       "Server (IP/hostname):", -1, 8, 8, 132, 10
+    EDITTEXT    IDC_SERVER, 84, 6, 124, 12, 0x0080L
+    LTEXT       "Port:", -1, 220, 8, 22, 10
+    EDITTEXT    IDC_PORT, 240, 6, 50, 12, 0x0080L
+
+    LTEXT       "Model:", -1, 8, 24, 30, 10
+    EDITTEXT    IDC_MODEL, 42, 22, 60, 12, 0x0080L
+
+    LTEXT       "Status:", -1, 110, 24, 24, 10
+    LTEXT       "Ready. Enter a server and test the connection.", IDC_STATUS, 140, 24, 150, 10
+
+    LTEXT       "Prompt:", -1, 8, 42, 34, 10
+    EDITTEXT    IDC_PROMPT, 8, 58, 282, 32, 0x00A00044L
+
+    LTEXT       "Response:", -1, 8, 100, 42, 10
+    EDITTEXT    IDC_RESPONSE, 8, 113, 282, 74, 0x00A00844L
+
+    CONTROL     "Disable thinking (sends \"think\":false, for Qwen3/DeepSeek-R1 style models)", IDC_THINK, "BUTTON", 0x50010003L, 8, 200, 282, 10
+
+    PUSHBUTTON  "Clear", IDC_CLEAR, 8, 216, 48, 14
+    DEFPUSHBUTTON "Send", IDC_SEND, 114, 216, 42, 14
+    PUSHBUTTON  "Test Connection", IDC_TEST, 160, 216, 78, 14
+    PUSHBUTTON  "Exit", 2, 242, 216, 48, 14
+END

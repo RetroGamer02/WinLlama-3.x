@@ -1,0 +1,26 @@
+; WinLlama 3.x module definition file.
+;
+; Note: OpenWatcom's wlink does not consume .def files directly -- it
+; has its own native directive language (NAME/FILE/OPTION/EXPORT/
+; SYSTEM). The STACKSIZE setting below is what actually matters for
+; this project, and it's applied via "option stack=16384" on the
+; wlink command line in the makefile, not by this file. This .def is
+; kept as the conventional, portable record of the project's linker
+; settings -- e.g. it would be picked up as-is by a genuine
+; .def-consuming linker (Microsoft LINK, Borland TLINK/ILINK32) if
+; this project is ever rebuilt with a different 16-bit toolchain.
+;
+; No EXPORTS section: DialogProcedure is declared static (internal
+; linkage, correct -- nothing outside winllama.c calls it by name) and
+; is only ever passed to CreateDialog() as a callback pointer. It does
+; not need, and cannot have, a public export record; __export requires
+; external linkage, which contradicts static (this combination is what
+; produced the DIALOGPROCEDURE undefined-reference link error).
+NAME        WINLLAMA
+DESCRIPTION 'WinLlama 3.x - a Windows 3.1 Ollama client'
+EXETYPE     WINDOWS
+STUB        'WINSTUB.EXE'
+CODE        PRELOAD MOVEABLE DISCARDABLE
+DATA        PRELOAD MOVEABLE MULTIPLE
+HEAPSIZE    2048
+STACKSIZE   16384
